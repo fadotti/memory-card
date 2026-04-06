@@ -1,0 +1,100 @@
+:root {
+  font-family: "Google Sans", sans-serif;
+  --transition-time: 0.1s;
+}
+
+div.first-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  font-size: 1.2rem;
+}
+
+div.first-section > div:nth-child(3) {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+div.first-section > div:nth-child(4) {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+div.first-section > div.align-left {
+  align-self: flex-start;
+}
+
+div.first-section > div.league-name {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 40px 0 0;
+}
+
+div#title {
+  /* text-align: center; */
+  font-size: 5rem;
+  /* font-family: "Freckle Face", system-ui; */
+  font-family: "Rubik Dirt", system-ui;
+  margin: 0 0 20px;
+}
+
+.card-container img {
+  transition: all var(--transition-time);
+}
+
+.card-container span {
+  margin: 2px;
+  text-align: center;
+  height: 60px;
+}
+
+.card-container {
+  width: 150px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: solid 3px #E54F6D;
+  border-radius: 5%;
+  font-weight: 700;
+  box-shadow: 0px 4px 5px 0px #451F55;
+  transition: all var(--transition-time);
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all var(--transition-time);
+  }
+}
+
+.card-container.hidden {
+  border-color: black;
+  background-color: black;
+  transition: all var(--transition-time);
+}
+
+.card-container.hidden img {
+  opacity: 0;
+  transition: all var(--transition-time);
+}
+
+/* @keyframes card-hover {
+  from {
+    box-shadow: 0px 4px 5px 0px #451F55;
+  }
+
+  to {
+    box-shadow: 0px 4px 30px 12px #451F55;
+    transform: scale(1.1);
+  }
+} */
+
+.card-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
