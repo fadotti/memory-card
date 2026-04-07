@@ -26,6 +26,16 @@ div.first-section > div.align-left {
   align-self: flex-start;
 }
 
+div.first-section span {
+  display: inline-block;
+  transition: all var(--transition-time);
+}
+
+div.first-section span.animate {
+  transform: scale(1.4);
+  transition: all var(--transition-time);
+}
+
 div.first-section > div.league-name {
   font-size: 2rem;
   font-weight: 600;
@@ -97,4 +107,33 @@ div#title {
   justify-content: center;
   gap: 10px;
   margin-top: 40px;
+}
+
+div#winning-message {
+  font-family: "Rubik Dirt", system-ui;
+  width: fit-content;
+  text-align: center;
+  margin: 50px auto;
+  font-size: 3rem;
+}
+
+button#play-again-button {
+  margin: auto;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Google Sans", sans-serif;
+  background-color: #724E91;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 5px 0px #451F55;
+  transition: all 1s;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 4px 10px 5px #451F55;
+    transition: all 1s;
+  }
 }

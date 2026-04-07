@@ -2,14 +2,36 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Card from './components/Card.jsx'
 
+let country;
+const randomNumber = Math.random() * 6
+
+if(randomNumber < 1) {
+  country = 'argentina';
+} else if(randomNumber < 2) {
+  country = 'england';
+} else if(randomNumber < 3) {
+  country = 'france';
+} else if(randomNumber < 4) {
+  country = 'germany';
+} else if(randomNumber < 5) {
+  country = 'italy';
+} else {
+  country = 'spain';
+}
+
 function App() {
   const [isDataReady, setIsDataReady] = useState(localStorage.getItem('leagueData') !== null);
+  const [isDataComplete, setIsDataComplete] = useState(-1);
   const [count, setCount] = useState(0);
   //IndexArray needs to contain 10 random numbers representing teams, and it needs to be populated for the app to render
   const [indexArray, setIndexArray] = useState([]);
   const [clickedIndices, setClickedIndices] = useState([]);
   const [cardsHiddenClass, setCardsHiddenClass] = useState('');
+  const [scoreAnimationClass, setScoreAnimationClass] = useState('');
+  const [highScoreAnimationClass, setHighScoreAnimationClass] = useState('');
   const [highestScore, setHighestScore] = useState(0);
+
+  console.log(country);
 
   async function fetchData() {
     const myHeaders = new Headers();
@@ -80,12 +102,22 @@ function App() {
       const result = fetchData();
       result.then(result => {
         window.leagueData = result;
+        // Check whether all data is available, use only in production
+        setIsDataComplete(Object.entries(window.leagueData)
+          .findIndex((element) => {
+            element[1].response.length === 0;
+          }));
         localStorage.setItem('leagueData', JSON.stringify(window.leagueData));
         setIsDataReady(true);
       });
     } else {
       window.leagueData = JSON.parse(localStorage.getItem('leagueData'));
-      setIndexArray(selectTenTeamsAtRandom(window.leagueData.argentina.response.length));
+      // Check whether all data is available, use only in production
+      setIsDataComplete(Object.entries(window.leagueData)
+        .findIndex((element) => {
+          element[1].response.length === 0;
+        }));
+      setIndexArray(selectTenTeamsAtRandom(window.leagueData[country].response.length));
     }
   }, [isDataReady])
 
@@ -104,12 +136,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[0])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[0]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -122,12 +162,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[1])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[1]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -140,12 +188,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[2])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[2]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -158,12 +214,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[3])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[3]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -176,12 +240,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[4])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[4]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -194,12 +266,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[5])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[5]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -212,12 +292,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[6])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[6]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -230,12 +318,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[7])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[7]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -248,12 +344,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[8])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[8]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -266,12 +370,20 @@ function App() {
     if(!clickedIndices.includes(indexArray[9])) {
       setCardsHiddenClass('hidden');
       setCount(count + 1);
-      if(count + 1 > highestScore) setHighestScore(count + 1);
+      setScoreAnimationClass('animate')
+      if(count + 1 > highestScore) {
+        setHighestScore(count + 1);
+        setHighScoreAnimationClass('animate')
+      }
       setTimeout(() => {
         setClickedIndices([...clickedIndices, indexArray[9]]);
         setIndexArray(shuffle(indexArray));
         setTimeout(() => {
           setCardsHiddenClass('');
+          setScoreAnimationClass('')
+          if(count + 1 > highestScore) {
+            setHighScoreAnimationClass('')
+          }
         }, 250)
       }, 250)
     } else {
@@ -279,50 +391,93 @@ function App() {
       setClickedIndices([]);
     }
   }
-
-  if(indexArray.length > 0) {
+  
+  // Use only in production
+  // if(isDataComplete === -1) {
+  //   return (
+  //     <>
+  //       <p>Daily number of API requests exceeded.</p>
+  //       <p>Please try again tomorrow.</p>
+  //     </>
+  //   )
+  // }
+  if(indexArray.length > 0 && highestScore == 10) {
     return (
       <>
         <div className='first-section'>
           <div id='title'>Memory Game</div>
           <div className='align-left'>Pick each football team ONLY once. If you pick them all, you win!</div>
-          <div className='align-left'>Highest score: <span>{highestScore}</span></div>
-          <div className='align-left'>Current score: <span>{count}</span></div>
-          <div className='league-name'>Copa Argentina</div>
+          <div className='align-left'>Highest score: <span className={highScoreAnimationClass}>{highestScore}</span></div>
+          <div className='align-left'>Current score: <span className={scoreAnimationClass}>{count}</span></div>
+          <div className='league-name'>
+            {window.leagueData[country].parameters.league == '78' && 'Bundesliga'}
+            {window.leagueData[country].parameters.league == '128' && 'Liga Profesional Argentina'}
+            {window.leagueData[country].parameters.league == '61' && 'Ligue 1'}
+            {window.leagueData[country].parameters.league == '135' && 'Serie A'}
+            {window.leagueData[country].parameters.league == '140' && 'La Liga'}
+            {window.leagueData[country].parameters.league == '39' && 'Premier League'}
+          </div>
+        </div>
+        <div>
+          <div id='winning-message'>Congratulations! You won the game</div>
+          <button id='play-again-button'
+          onClick={() => {
+            window.location.reload();
+          }}>Play again
+          </button>
+        </div>
+      </>
+    )
+  } else if(indexArray.length > 0) {
+    return (
+      <>
+        <div className='first-section'>
+          <div id='title'>Memory Game</div>
+          <div className='align-left'>Pick each football team ONLY once. If you pick them all, you win!</div>
+          <div className='align-left'>Highest score: <span className={highScoreAnimationClass}>{highestScore}</span></div>
+          <div className='align-left'>Current score: <span className={scoreAnimationClass}>{count}</span></div>
+          <div className='league-name'>
+            {window.leagueData[country].parameters.league == '78' && 'Bundesliga'}
+            {window.leagueData[country].parameters.league == '128' && 'Liga Profesional Argentina'}
+            {window.leagueData[country].parameters.league == '61' && 'Ligue 1'}
+            {window.leagueData[country].parameters.league == '135' && 'Serie A'}
+            {window.leagueData[country].parameters.league == '140' && 'La Liga'}
+            {window.leagueData[country].parameters.league == '39' && 'Premier League'}
+          </div>
         </div>
         <div className="card-row">
           <Card
           onClick={handleCardClickZero}
-          src={window.leagueData.argentina.response[indexArray[0]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[0]].team.name}
+          src={window.leagueData[country].response[indexArray[0]].team.logo}
+          text={window.leagueData[country].response[indexArray[0]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickOne}
-          src={window.leagueData.argentina.response[indexArray[1]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[1]].team.name}
+          src={window.leagueData[country].response[indexArray[1]].team.logo}
+          text={window.leagueData[country].response[indexArray[1]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickTwo}
-          src={window.leagueData.argentina.response[indexArray[2]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[2]].team.name}
+          src={window.leagueData[country].response[indexArray[2]].team.logo}
+          text={window.leagueData[country].response[indexArray[2]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickThree}
-          src={window.leagueData.argentina.response[indexArray[3]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[3]].team.name}
+          src={window.leagueData[country].response[indexArray[3]].team.logo}
+          text={window.leagueData[country].response[indexArray[3]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickFour}
-          src={window.leagueData.argentina.response[indexArray[4]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[4]].team.name}
+          src={window.leagueData[country].response[indexArray[4]].team.logo}
+          text={window.leagueData[country].response[indexArray[4]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
@@ -330,36 +485,36 @@ function App() {
         <div className="card-row">
           <Card
           onClick={handleCardClickFive}
-          src={window.leagueData.argentina.response[indexArray[5]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[5]].team.name}
+          src={window.leagueData[country].response[indexArray[5]].team.logo}
+          text={window.leagueData[country].response[indexArray[5]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickSix}
-          src={window.leagueData.argentina.response[indexArray[6]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[6]].team.name}
+          src={window.leagueData[country].response[indexArray[6]].team.logo}
+          text={window.leagueData[country].response[indexArray[6]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickSeven}
-          src={window.leagueData.argentina.response[indexArray[7]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[7]].team.name}
+          src={window.leagueData[country].response[indexArray[7]].team.logo}
+          text={window.leagueData[country].response[indexArray[7]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickEight}
-          src={window.leagueData.argentina.response[indexArray[8]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[8]].team.name}
+          src={window.leagueData[country].response[indexArray[8]].team.logo}
+          text={window.leagueData[country].response[indexArray[8]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
           <Card
           onClick={handleCardClickNine}
-          src={window.leagueData.argentina.response[indexArray[9]].team.logo}
-          text={window.leagueData.argentina.response[indexArray[9]].team.name}
+          src={window.leagueData[country].response[indexArray[9]].team.logo}
+          text={window.leagueData[country].response[indexArray[9]].team.name}
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
