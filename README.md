@@ -14,6 +14,10 @@ There are 2 React components in this application: `App` and `Card`. `App` contro
 
 The game setup is as follows: a country will be chosen at random, and from the country's top football league, 10 teams will be chosen again at random.
 
+<div align='center'>
+    <img src = ./public/memorycard.png>
+</div>
+
 When a user opens the app, two things can happen, depending on whether league data is available in the `localStorage`.
 
 ### Case 1: League Data is not Available in *localStorage*
