@@ -61,6 +61,9 @@ div#title {
   margin: 2px;
   text-align: center;
   height: 60px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 .card-container {
@@ -75,6 +78,7 @@ div#title {
   font-weight: 700;
   box-shadow: 0px 4px 5px 0px #451F55;
   transition: all var(--transition-time);
+  text-overflow: ellipsis;
 
   &:hover {
     cursor: pointer;
@@ -147,6 +151,7 @@ button#play-again-button {
 @media (max-width: 960px) {
   .card-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   } 
 
   .card-grid > div:nth-child(9) {
@@ -158,7 +163,7 @@ button#play-again-button {
   } 
 
   div.first-section {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   div.first-section > div:nth-child(3) {
@@ -183,7 +188,7 @@ button#play-again-button {
   } */
 
   .card-container {
-    width: 70px;
+    width: 75px;
     padding: 2px;
     display: flex;
     flex-direction: column;
@@ -194,7 +199,7 @@ button#play-again-button {
     font-weight: 700;
     box-shadow: 0px 4px 5px 0px #451F55;
     transition: all var(--transition-time);
-    font-size: 0.5rem;
+    font-size: 0.7rem;
   }
 
   .card-container span {

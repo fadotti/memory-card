@@ -438,7 +438,10 @@ function App() {
       <>
         <div className='first-section'>
           <div id='title'>Memory Game</div>
-          <div className='align-left'>Pick each football team ONLY once. If you pick them all, you win!</div>
+          <div className='align-left'>
+            <p>Pick each football team ONLY once.</p> 
+            <p>If you pick them all, you win!</p>
+          </div>
           <div className='align-left'>Highest score: <span className={highScoreAnimationClass}>{highestScore}</span></div>
           <div className='align-left'>Current score: <span className={scoreAnimationClass}>{count}</span></div>
           <div className='league-name'>
