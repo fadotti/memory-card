@@ -53,6 +53,8 @@ div#title {
 .card-container img {
   transition: all var(--transition-time);
   width: 100%;
+  aspect-ratio: 1 / 1;
+  /* height: 130px; */
 }
 
 .card-container span {
@@ -175,6 +177,11 @@ button#play-again-button {
     font-size: 3rem;
   }
 
+  /* .card-container img {
+    height: 70px;
+    object-fit: contain;
+  } */
+
   .card-container {
     width: 70px;
     padding: 2px;
@@ -187,7 +194,7 @@ button#play-again-button {
     font-weight: 700;
     box-shadow: 0px 4px 5px 0px #451F55;
     transition: all var(--transition-time);
-    font-size: 0.7rem;
+    font-size: 0.5rem;
   }
 
   .card-container span {

@@ -112,6 +112,11 @@ function App() {
       });
     } else {
       window.leagueData = JSON.parse(localStorage.getItem('leagueData'));
+      console.log(Object.entries(window.leagueData)
+        .findIndex((element) => {
+          console.log(element[1].response.length);
+          element[1].response.length === 0;
+        }));
       // Check whether all data is available, use only in production
       setIsDataComplete(Object.entries(window.leagueData)
         .findIndex((element) => {
@@ -393,7 +398,7 @@ function App() {
   }
   
   // Use only in production
-  if(isDataComplete === -1) {
+  if(isDataComplete > -1) {
     return (
       <>
         <p>Daily number of API requests exceeded.</p>
