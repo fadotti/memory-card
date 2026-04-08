@@ -3,6 +3,10 @@
   --transition-time: 0.1s;
 }
 
+body {
+  margin-left: 0;
+}
+
 div.first-section {
   display: flex;
   flex-direction: column;
