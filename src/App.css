@@ -26,6 +26,10 @@ div.first-section > div.align-left {
   align-self: flex-start;
 }
 
+div.first-section > div.align-left p {
+  margin: 5px 0;
+}
+
 div.first-section span {
   display: inline-block;
   transition: all var(--transition-time);
@@ -47,7 +51,7 @@ div#title {
   font-size: 5rem;
   /* font-family: "Freckle Face", system-ui; */
   font-family: "Rubik Dirt", system-ui;
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 
 .card-container img {
@@ -152,6 +156,7 @@ button#play-again-button {
   .card-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    margin: 10px auto;
   } 
 
   .card-grid > div:nth-child(9) {
@@ -176,6 +181,7 @@ button#play-again-button {
 
   div.first-section > div.league-name {
     font-size: 1.4rem;
+    margin: 10px 0 0;
   }
 
   div#title {
