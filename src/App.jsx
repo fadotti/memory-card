@@ -393,14 +393,14 @@ function App() {
   }
   
   // Use only in production
-  // if(isDataComplete === -1) {
-  //   return (
-  //     <>
-  //       <p>Daily number of API requests exceeded.</p>
-  //       <p>Please try again tomorrow.</p>
-  //     </>
-  //   )
-  // }
+  if(isDataComplete === -1) {
+    return (
+      <>
+        <p>Daily number of API requests exceeded.</p>
+        <p>Please try again tomorrow.</p>
+      </>
+    )
+  }
   if(indexArray.length > 0 && highestScore == 10) {
     return (
       <>
@@ -445,7 +445,7 @@ function App() {
             {window.leagueData[country].parameters.league == '39' && 'Premier League'}
           </div>
         </div>
-        <div className="card-row">
+        <div className="card-grid">
           <Card
           onClick={handleCardClickZero}
           src={window.leagueData[country].response[indexArray[0]].team.logo}
@@ -481,8 +481,6 @@ function App() {
           hiddenStatus={cardsHiddenClass}
           >
           </Card>
-        </div>
-        <div className="card-row">
           <Card
           onClick={handleCardClickFive}
           src={window.leagueData[country].response[indexArray[5]].team.logo}
