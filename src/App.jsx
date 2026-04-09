@@ -31,8 +31,6 @@ function App() {
   const [highScoreAnimationClass, setHighScoreAnimationClass] = useState('');
   const [highestScore, setHighestScore] = useState(0);
 
-  console.log(country);
-
   async function fetchData() {
     const myHeaders = new Headers();
     myHeaders.append("x-apisports-key", '31479143eba972bf952b69768313805c');
@@ -102,25 +100,24 @@ function App() {
       const result = fetchData();
       result.then(result => {
         window.leagueData = result;
+        localStorage.setItem('leagueData', JSON.stringify(window.leagueData));
         // Check whether all data is available, use only in production
         setIsDataComplete(Object.entries(window.leagueData)
           .findIndex((element) => {
-            element[1].response.length === 0;
+            return element[1].response.length === 0;
           }));
-        localStorage.setItem('leagueData', JSON.stringify(window.leagueData));
         setIsDataReady(true);
       });
     } else {
       window.leagueData = JSON.parse(localStorage.getItem('leagueData'));
-      console.log(Object.entries(window.leagueData)
-        .findIndex((element) => {
-          console.log(element[1].response.length);
-          element[1].response.length === 0;
-        }));
+      // console.log(Object.entries(window.leagueData)
+      //   .findIndex((element) => {
+      //     return element[1].response.length === 0;
+      //   }));
       // Check whether all data is available, use only in production
       setIsDataComplete(Object.entries(window.leagueData)
         .findIndex((element) => {
-          element[1].response.length === 0;
+          return element[1].response.length === 0;
         }));
       setIndexArray(selectTenTeamsAtRandom(window.leagueData[country].response.length));
     }
