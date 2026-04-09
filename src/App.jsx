@@ -21,8 +21,8 @@ if(randomNumber < 1) {
 
 function App() {
   const [isDataReady, setIsDataReady] = useState(localStorage.getItem('leagueData') !== null);
-  const [isDataComplete, setIsDataComplete] = useState(-1);
   const [count, setCount] = useState(0);
+  const [numberOfAttempts, setNumberOfAttempts] = useState(1);
   //IndexArray needs to contain 10 random numbers representing teams, and it needs to be populated for the app to render
   const [indexArray, setIndexArray] = useState([]);
   const [clickedIndices, setClickedIndices] = useState([]);
@@ -101,25 +101,27 @@ function App() {
       result.then(result => {
         window.leagueData = result;
         localStorage.setItem('leagueData', JSON.stringify(window.leagueData));
-        // Check whether all data is available, use only in production
-        setIsDataComplete(Object.entries(window.leagueData)
-          .findIndex((element) => {
-            return element[1].response.length === 0;
-          }));
         setIsDataReady(true);
       });
     } else {
-      window.leagueData = JSON.parse(localStorage.getItem('leagueData'));
-      // console.log(Object.entries(window.leagueData)
-      //   .findIndex((element) => {
-      //     return element[1].response.length === 0;
-      //   }));
-      // Check whether all data is available, use only in production
-      setIsDataComplete(Object.entries(window.leagueData)
+      setNumberOfAttempts(numberOfAttempts + 1);
+      if(localStorage.getItem('leagueData') !== null) window.leagueData = JSON.parse(localStorage.getItem('leagueData'));
+      // console.log(window.leagueData)
+      // console.log(Object.entries(window.leagueData));
+      const indexOfFailedRequestAttempt = Object.entries(window.leagueData)
         .findIndex((element) => {
           return element[1].response.length === 0;
-        }));
-      setIndexArray(selectTenTeamsAtRandom(window.leagueData[country].response.length));
+        })
+      if(indexOfFailedRequestAttempt > -1) {
+        localStorage.removeItem('leagueData');
+        if(numberOfAttempts == 1) setIsDataReady(false);
+      } else {
+        setIndexArray(selectTenTeamsAtRandom(window.leagueData[country].response.length));
+      }
+    }
+
+    return () => {
+
     }
   }, [isDataReady])
 
@@ -395,7 +397,7 @@ function App() {
   }
   
   // Use only in production
-  if(isDataComplete > -1) {
+  if(localStorage.getItem('leagueData') === null) {
     return (
       <>
         <p>Daily number of API requests exceeded.</p>
