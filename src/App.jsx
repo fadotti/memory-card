@@ -396,15 +396,6 @@ function App() {
     }
   }
   
-  // Use only in production
-  if(localStorage.getItem('leagueData') === null) {
-    return (
-      <>
-        <p>Daily number of API requests exceeded.</p>
-        <p>Please try again tomorrow.</p>
-      </>
-    )
-  }
   if(indexArray.length > 0 && highestScore == 10) {
     return (
       <>
@@ -528,7 +519,14 @@ function App() {
     )
   } else {
     return (
-      <p>Loading data, please wait...</p>
+      <>
+        <p>Loading data, please wait...</p>
+        <br />
+        <p>If the application takes too long to load, the daily <br />
+          number of API requests may have been exceeded.
+        </p>
+        <p>Please try again tomorrow.</p>     
+      </>
     )
   }
 }
